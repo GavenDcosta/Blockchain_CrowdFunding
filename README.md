@@ -1,4 +1,4 @@
-# TEproj.
+# TE_Mini_Project.
 
 Will add many more features in the future.
 
