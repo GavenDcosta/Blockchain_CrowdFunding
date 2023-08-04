@@ -1,4 +1,4 @@
-# TE_Mini_Project.
+# BlockChain_CrowdFunding
 
 Will add many more features in the future.
 
