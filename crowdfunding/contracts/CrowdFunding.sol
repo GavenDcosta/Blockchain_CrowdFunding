@@ -82,4 +82,30 @@ contract CrowdFunding {
 
         return allCampaigns;
     }
+
+    function refundCampaign(uint256 _id) public {
+        Campaign storage campaign = campaigns[_id];
+        require(msg.sender == campaign.owner, "Only the owner can refund");
+
+        for (uint256 i = 0; i < campaign.donators.length; i++) {
+            address donator = campaign.donators[i];
+            uint256 donationAmount = campaign.donations[i];
+            (bool sent, ) = payable(donator).call{value: donationAmount}("");
+            require(sent, "Refund failed");
+        }
+
+        // Reset campaign details after refund
+        delete campaigns[_id];
+        numberOfCampaigns--;
+    }
+
+    function deleteCampaign(uint256 _id) public {
+        Campaign storage campaign = campaigns[_id];
+        require(msg.sender == campaign.owner, "Only the owner can delete");
+
+        // Reset campaign details
+        delete campaigns[_id];
+        numberOfCampaigns--;
+    }
+
 } 
