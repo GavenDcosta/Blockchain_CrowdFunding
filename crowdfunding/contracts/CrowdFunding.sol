@@ -99,6 +99,7 @@ contract CrowdFunding {
         numberOfCampaigns--;
     }
 
+
     function deleteCampaign(uint256 _id) public {
         Campaign storage campaign = campaigns[_id];
         require(msg.sender == campaign.owner, "Only the owner can delete");
@@ -107,5 +108,72 @@ contract CrowdFunding {
         delete campaigns[_id];
         numberOfCampaigns--;
     }
+
+    function refundAllCampaign(uint256 _id) public {
+    Campaign storage campaign = campaigns[_id];
+
+    // Check if the caller is the owner or a donator
+    require(msg.sender == campaign.owner || isDonator(_id, msg.sender), "Only the owner or a donator can refund");
+
+    if (msg.sender == campaign.owner) {
+        // Refund all donations if the caller is the owner
+        for (uint256 i = 0; i < campaign.donators.length; i++) {
+            address donator = campaign.donators[i];
+            uint256 donationAmount = campaign.donations[i];
+            (bool sent, ) = payable(donator).call{value: donationAmount}("");
+            require(sent, "Refund failed");
+        }
+
+        // Reset campaign details after refund
+        delete campaigns[_id];
+        numberOfCampaigns--;
+    } else {
+        // Refund only the caller's donation if the caller is a donator
+        uint256 donatorIndex = getDonatorIndex(_id, msg.sender);
+        require(donatorIndex != type(uint256).max, "Donator not found");
+
+        address donator = campaign.donators[donatorIndex];
+        uint256 donationAmount = campaign.donations[donatorIndex];
+        (bool sent, ) = payable(donator).call{value: donationAmount}("");
+        require(sent, "Refund failed");
+
+        // Remove the refunded donation from the campaign
+        removeDonation(_id, donatorIndex);
+    }
+}
+
+function isDonator(uint256 _id, address _donator) internal view returns (bool) {
+    Campaign storage campaign = campaigns[_id];
+    for (uint256 i = 0; i < campaign.donators.length; i++) {
+        if (campaign.donators[i] == _donator) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function getDonatorIndex(uint256 _id, address _donator) internal view returns (uint256) {
+    Campaign storage campaign = campaigns[_id];
+    for (uint256 i = 0; i < campaign.donators.length; i++) {
+        if (campaign.donators[i] == _donator) {
+            return i;
+        }
+    }
+    return type(uint256).max; // Donator not found
+}
+
+function removeDonation(uint256 _id, uint256 _index) internal {
+    Campaign storage campaign = campaigns[_id];
+    
+    // Shift elements to remove the donation at the specified index
+    for (uint256 i = _index; i < campaign.donators.length - 1; i++) {
+        campaign.donators[i] = campaign.donators[i + 1];
+        campaign.donations[i] = campaign.donations[i + 1];
+    }
+
+    // Remove the last element
+    campaign.donators.pop();
+    campaign.donations.pop();
+}
 
 } 

@@ -6,7 +6,7 @@ import { ethers } from 'ethers'
 const StateContext = createContext()
 
 export const StateContextProvider = ({ children }) => {
-    const { contract } = useContract('0xe286547FBAACA6ee521f9D4BA02bd93579F1BD04')   //address of my smart contract
+    const { contract } = useContract('0x2A114e91D811F30101c968B442EFeAf51D1C3217')   //address of my smart contract
     const { mutateAsync: createCampaign } = useContractWrite(contract, 'createCampaign')   //using the write functions declared in smart contract
 
     const address = useAddress()    
@@ -87,6 +87,33 @@ export const StateContextProvider = ({ children }) => {
         return parsedDonations
     }
 
+    const refundCampaign = async (pId) => {
+        try {
+            const data = await contract.call('refundCampaign', [pId]);
+            console.log("Refund success", data);
+        } catch (error) {
+            console.log("Refund failed", error);
+        }
+    };
+
+    const deleteCampaign = async (pId) => {
+        try {
+            const data = await contract.call('deleteCampaign', [pId]);
+            console.log("Campaign deletion success", data);
+        } catch (error) {
+            console.log("Campaign deletion failed", error);
+        }
+    };
+
+    const refundUserCampaign = async (pId) => {
+        try {
+            const data = await contract.call('refundAllCampaign', [pId]);
+            console.log("Refund all campaign success", data);
+        } catch (error) {
+            console.log("Refund all campaign failed", error);
+        }
+    };
+
     return(
         <StateContext.Provider    //sharing all of the values throughout our application
           value={{ 
@@ -97,7 +124,10 @@ export const StateContextProvider = ({ children }) => {
             getCampaigns,
             getUserCampaigns,
             donate,
-            getDonations
+            getDonations,
+            deleteCampaign,
+            refundCampaign,
+            refundAllCampaigns: refundUserCampaign
            }}
         >
          {children}
