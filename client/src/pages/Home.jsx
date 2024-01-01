@@ -32,8 +32,8 @@ const Home = ({ search, setSearch }) => {
       const hasCommonWord = descWords.some((word) => searchTextWords.includes(word));
 
       return (
-        campaign.owner.includes(search) ||
-        campaign.title.includes(search) ||
+        campaign.owner === search ||
+        campaign.title.toLowerCase().includes(search.toLowerCase()) ||
         hasCommonWord
       );
     });
