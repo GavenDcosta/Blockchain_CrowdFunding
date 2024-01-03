@@ -27,9 +27,14 @@ const Home = ({ search, setSearch }) => {
 
     const filteredCampaigns = campaigns.filter((campaign) => {
       const descWords = campaign.description.trim().toLowerCase().split(' ');
+      const titleWords = campaign.title.trim().toLowerCase().split(' ')
       const searchTextWords = search.trim().toLowerCase().split(' ');
 
-      const hasCommonWord = descWords.some((word) => searchTextWords.includes(word));
+      const categoryTags = campaign.category.trim().toLowerCase().split(',')
+
+      const hasCommonWord = descWords.some((word) => searchTextWords.includes(word)) ||
+                            titleWords.some((word) => searchTextWords.includes(word)) ||
+                            categoryTags.some((tag) => searchTextWords.includes(tag.replace(/#/g, '')))
 
       return (
         campaign.owner === search ||

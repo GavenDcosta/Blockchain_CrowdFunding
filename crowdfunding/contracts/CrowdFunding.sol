@@ -10,6 +10,7 @@ contract CrowdFunding {
         uint256 deadline;         //deadline of the funding
         uint256 amountCollected;  
         string image;             //url of the image
+        string category;
         address[] donators;       //array of donators addresses
         uint256[] donations;      //array of actual amount of donations
     }
@@ -26,7 +27,7 @@ contract CrowdFunding {
  //then we have to specify what it returns  "returns (uint256)" --> in the createCampaign function we want it to return the ID of the created campaign
 
 
-    function createCampaign(address _owner, string memory _title, string memory _description, uint256 _target, uint256 _deadline, string memory _image) public returns (uint256) {
+    function createCampaign(address _owner, string memory _title, string memory _description, uint256 _target, uint256 _deadline, string memory _image, string memory _category) public returns (uint256) {
 
         Campaign storage campaign = campaigns[numberOfCampaigns];  //array of the campaigns 
 
@@ -40,6 +41,7 @@ contract CrowdFunding {
         campaign.deadline = _deadline;  
         campaign.amountCollected = 0;     
         campaign.image = _image;           //all values for campaigns[0]...then increment and next will be campaigns[1]
+        campaign.category = _category;
 
         numberOfCampaigns++;         //incrementing the index of the array 
 

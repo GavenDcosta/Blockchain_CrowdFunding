@@ -16,7 +16,8 @@ const CreateCampaign = () => {
       description:'',
       target:'',
       deadline:'',
-      image:''      
+      image:'',
+      category:''      
   })
 
   const handleFormFieldChange = (fieldName, e) => {
@@ -102,6 +103,7 @@ const CreateCampaign = () => {
                 />
               </div>
 
+              <div className='flex flex-wrap gap-[40px]'>
                 <FormField 
                    labelName = "Campaign Image *"
                    placeholder="Place image URl of your image"
@@ -109,6 +111,17 @@ const CreateCampaign = () => {
                    value={form.image}
                    handleChange = {(e) => {handleFormFieldChange('image', e)}}
                 />
+
+                <FormField 
+                   labelName = "Category (#health, #education) *"
+                   placeholder="Add Category of your campaign"
+                   inputType="text"
+                   value={form.category}
+                   handleChange = {(e) => {handleFormFieldChange('category', e)}}
+                />
+
+              </div>
+
 
               <div className='flex justify-center items-center mt-[40px]'>
                 <CustomButton

@@ -6,7 +6,7 @@ import { ethers } from 'ethers'
 import { useStateContext } from '../context'
 import { CustomButton, CountBox, Loader } from '../components'
 import { calculateBarPercentage, daysLeft } from '../utils'
-import { thirdweb } from '../assets'
+import { thirdweb, tagType } from '../assets'
 
 
 const CampaignDetails = () => {
@@ -49,7 +49,7 @@ const CampaignDetails = () => {
         <div className="flex-1 flex-col">
           <img src={state.image} alt="campaign" className='w-full h-[410px] object-cover rounded-xl'/>
           <div className="relative w-full rounded-xl h-[20px] bg-[#3a3a43] mt-2">
-            <div className="absolute h-full rounded-xl bg-[#4acd8d]" style={{ width:`${calculateBarPercentage(state.target, state.amountCollected)}%`, maxWidth:'100%'}}><strong className='text-[#043927] pl-2'>{calculateBarPercentage(state.target, state.amountCollected)}%</strong></div>
+            <div className="absolute h-full rounded-xl bg-[#4acd8d] flex items-center" style={{ width:`${calculateBarPercentage(state.target, state.amountCollected)}%`, maxWidth:'100%'}}><strong className='text-white font-semibold pl-2'>{calculateBarPercentage(state.target, state.amountCollected)}%</strong></div>
           </div>
         </div>
 
@@ -70,7 +70,7 @@ const CampaignDetails = () => {
                   </div>
                   <div>
                     <h4 className='font-epilogue font-semibold text-[14px] text-white break-all'>{state.owner}</h4>
-                    <p className='mt-4px font-epilogue font-normal text-[12px] text-[#808191]'>10 Campaigns</p>
+                    <p className='mt-4px font-epilogue font-normal text-[12px] text-[#808191]'>Has created {state.count} Campaigns in the Past</p>
                   </div>
              </div>
             </div>
@@ -81,6 +81,14 @@ const CampaignDetails = () => {
              <div className="mt-[20px]">
                <p className='font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify'>{state.description}</p>
              </div>
+            </div>
+
+            <div>
+             <h4 className='font-epilogue font-semibold text-[18px] text-white uppercase'>Category</h4>
+             <div className='flex flex-row items-center md-[18px] mt-[20px]'>
+                <img src={tagType} alt="tag" className='w-[25px] h-[25px] object-ccontain'/>
+                <p className="ml-[12px] mt-[2px] font-epilogue font-medium text-[17px] text-[#808191]">{state.category}</p>
+            </div>
             </div>
 
             <div>

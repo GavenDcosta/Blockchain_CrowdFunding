@@ -6,7 +6,7 @@ import { ethers } from 'ethers'
 const StateContext = createContext()
 
 export const StateContextProvider = ({ children }) => {
-    const { contract } = useContract('0xB0963F06905401c562E73d0CfE003e2597E5875b')   //address of my smart contract
+    const { contract } = useContract('0xbdFB2e2ed6B053ADc6DAD1E88D04693D72081078')   //address of my smart contract
     const { mutateAsync: createCampaign } = useContractWrite(contract, 'createCampaign')   //using the write functions declared in smart contract
 
     const address = useAddress()    
@@ -24,7 +24,7 @@ export const StateContextProvider = ({ children }) => {
         //         form.image
         //    ])
 
-            const data = await contract.call("createCampaign", [address,form.title,form.description,form.target,new Date(form.deadline).getTime(),form.image])
+            const data = await contract.call("createCampaign", [address,form.title,form.description,form.target,new Date(form.deadline).getTime(),form.image,form.category])
              
             console.log("contract call success", data)
         }
@@ -46,6 +46,7 @@ export const StateContextProvider = ({ children }) => {
                deadline : campaign.deadline.toNumber(),
                amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
                image : campaign.image,
+               category : campaign.category,
                pId : i   //index of campaign
         }))
 

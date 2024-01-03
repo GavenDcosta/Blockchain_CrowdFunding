@@ -6,8 +6,10 @@ import FundCard  from './FundCard'
 const DisplayCampaign = ({ title, isLoading, campaigns }) => {
   const navigate = useNavigate()
 
-  const handleNavigate = (campaign) => {
-    navigate(`/campaign-details/${campaign.title}`, {state:campaign})   //sending state through routing, can retrive this state with useLocation Hook
+  
+
+  const handleNavigate = (campaign, count) => {
+    navigate(`/campaign-details/${campaign.title}`, {state: {...campaign, count}})   //sending state through routing, can retrive this state with useLocation Hook
   }
 
   return (
@@ -23,13 +25,24 @@ const DisplayCampaign = ({ title, isLoading, campaigns }) => {
           <p className='font-epilogue font-semibold text-[14px] leading-[30px] text-[#818183]'>You have not created campaigns yet</p>
         )}
 
-        {!isLoading && campaigns.length > 0 && campaigns.map((campaign) =>
-          <FundCard
-            key={campaign.id}
-            {...campaign}
-            handleClick = {() => handleNavigate(campaign)}
-          />
-        )}
+        {!isLoading && campaigns.length > 0 && campaigns.map((campaign) => {
+
+          var count = 0 
+          for(let i=0; i< campaigns.length;i++){
+            if(campaign.owner === campaigns[i].owner){
+              count++;
+            }
+          }
+          
+          return (
+            <FundCard
+              key={campaign.id}
+              {...campaign}
+              handleClick = {() => handleNavigate(campaign, count)}
+              count={count}
+            />
+          )
+       })}
       </div>
     </div>
   )
