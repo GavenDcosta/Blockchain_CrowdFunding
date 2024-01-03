@@ -1,6 +1,7 @@
 {
   "name": "client",
   "private": true,
+  "proxy": "https://gaven-blockchain-crowd-funding-api.vercel.app/",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",

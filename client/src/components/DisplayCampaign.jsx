@@ -25,7 +25,7 @@ const DisplayCampaign = ({ title, isLoading, campaigns }) => {
           <p className='font-epilogue font-semibold text-[14px] leading-[30px] text-[#818183]'>You have not created campaigns yet</p>
         )}
 
-        {!isLoading && campaigns.length > 0 && campaigns.map((campaign) => {
+        {!isLoading && campaigns.length > 0 && campaigns.map((campaign, index) => {
 
           var count = 0 
           for(let i=0; i< campaigns.length;i++){
@@ -40,6 +40,7 @@ const DisplayCampaign = ({ title, isLoading, campaigns }) => {
               {...campaign}
               handleClick = {() => handleNavigate(campaign, count)}
               count={count}
+              index={index}
             />
           )
        })}

@@ -70,7 +70,7 @@ const CampaignDetails = () => {
                   </div>
                   <div>
                     <h4 className='font-epilogue font-semibold text-[14px] text-white break-all'>{state.owner}</h4>
-                    <p className='mt-4px font-epilogue font-normal text-[12px] text-[#808191]'>Has created {state.count} Campaigns in the Past</p>
+                    <p className='mt-4px font-epilogue font-normal text-[12px] text-[#808191]'>Has created {state.count} {state.count == 1 ? "Campaign" : "Campaign's"} in the Past</p>
                   </div>
              </div>
             </div>
