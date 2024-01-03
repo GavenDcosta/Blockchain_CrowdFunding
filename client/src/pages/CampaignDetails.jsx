@@ -6,7 +6,7 @@ import { ethers } from 'ethers'
 import { useStateContext } from '../context'
 import { CustomButton, CountBox, Loader } from '../components'
 import { calculateBarPercentage, daysLeft } from '../utils'
-import { thirdweb, tagType } from '../assets'
+import { thirdweb, tagType, deleteIcon } from '../assets'
 
 
 const CampaignDetails = () => {
@@ -93,14 +93,47 @@ const CampaignDetails = () => {
   
       const data = await response.json();
       console.log("Success:", data);
+      setComplain({ ...complain, reason: '' })
+
+      setAllComplains([...allComplains, complain])
     } catch (error) {
       console.error("Error while sending complain:", error.message);
     }
   };
-  
 
-  
 
+
+  const handleDelete = async (id) => {
+     try {
+      const shouldDelete = window.confirm("Are you sure you want to delete this complain?");
+  
+      if (!shouldDelete) {
+        return;
+      }
+
+      const response = await fetch(`https://gaven-blockchain-crowd-funding-api.vercel.app/complains/deletecomplain/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorMessage}`);
+      }
+  
+      const deletedComplain = await response.json();
+      console.log("Complain deleted successfully:", deletedComplain);
+
+      const newFilteredComplains = allComplains.filter((complain) => complain._id != id) 
+      setAllComplains(newFilteredComplains)
+
+     } catch (error) {
+      console.log("Error while deleting", error.message)
+     }
+  }
+  
   return (
     <div>
       {isLoading && <Loader/>}
@@ -177,7 +210,14 @@ const CampaignDetails = () => {
                  {filteredComplains.length > 0 ? filteredComplains.map((item,index) => (
                       <div key={`${item.userid}-${index}`} className='flex flex-col items-start gap-1 flex-wrap'>
                          <p className='font-epilogue font-normal sm:text-[16px] text-[12px] text-[#b2b3bd] leading-[26px]'>{index + 1}.{item.userid}</p>
-                         <p className='font-epilogue font-normal text-16px text-[#808191] leading-[26px] break-all'>Reason:  {item.reason}</p>
+                         <div className='flex flex-row flex-wrap items-center justify-between gap-4'>
+                           <p className='font-epilogue font-normal text-16px text-[#808191] leading-[26px] break-all'>Reason:  {item.reason}</p>
+                           <img
+                             src={deleteIcon}
+                             className='w-[20px] h-[20px]'
+                             onClick={() => handleDelete(item._id)}
+                           />
+                         </div>
                       </div>
                  )) : (
                   <p className='font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify'>No complains yet, Feel free to send one</p>

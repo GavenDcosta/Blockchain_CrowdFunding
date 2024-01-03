@@ -12,9 +12,11 @@ import menu from './menu.svg';
 import money from './money.svg';
 import loader from './loader.svg';
 import thirdweb from './thirdweb.png';
+import deleteIcon from './delete.svg';
 
 export {
   tagType,
+  deleteIcon,
   createCampaign,
   dashboard,
   logo,

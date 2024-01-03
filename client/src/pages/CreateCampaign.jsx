@@ -6,6 +6,7 @@ import { CustomButton, FormField, Loader } from '../components'
 import { checkIfImage } from '../utils'
 import { useStateContext } from '../context'
 
+
 const CreateCampaign = () => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
