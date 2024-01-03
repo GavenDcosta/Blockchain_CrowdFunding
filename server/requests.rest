@@ -1,0 +1,16 @@
+POST http://localhost:5000/complains/givecomplain 
+Content-Type: application/json
+
+{
+    "srno": "1",
+    "userid": "3332437349dfbaefkvn",
+    "reason": "this campaign is a scam"
+}
+
+###
+
+GET http://localhost:5000/complains
+
+###
+
+DELETE  http://localhost:5000/complains/deletecomplain/6594e24ef6ce38a516a6a0ac
