@@ -65,6 +65,7 @@ const CampaignDetails = () => {
 
 
   const handleAddComplain = async () => {
+    console.log("Before fetch - Complain state:", complain);
     try {
       const response = await fetch("https://gaven-blockchain-crowd-funding-api.vercel.app/complains/givecomplain", {
         method: "POST",
@@ -75,17 +76,18 @@ const CampaignDetails = () => {
       });
   
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        const errorMessage = await response.text();
+        throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorMessage}`);
       }
   
       const data = await response.json();
-      console.log(data); 
-
+      console.log("Success:", data);
     } catch (error) {
-      console.error("Error while sending complain:", error);
+      console.error("Error while sending complain:", error.message);
     }
-  }
+  };
 
+  
 
   return (
     <div>
