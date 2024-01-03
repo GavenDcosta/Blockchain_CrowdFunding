@@ -13,11 +13,23 @@ const CampaignDetails = () => {
   const { state } = useLocation()    //retriving the state received through routing
   const { donate, getDonations, contract, address } = useStateContext()
   console.log(state)
+  console.log(address)
   const navigate = useNavigate()
 
   const [isLoading, setIsLoading] = useState(false)
   const [amount,setAmount] = useState('')
   const [donators,setDonators] = useState([])
+
+  const [complain, setComplain] = useState({
+    srno: state.index,
+    userid: address,
+    campaignuserid: state.owner,
+    reason: "",
+  })
+
+  const [allComplains, setAllComplains] = useState([])
+
+  console.log(complain)
  
   const remainingDays = daysLeft(state.deadline)
 
@@ -32,6 +44,16 @@ const CampaignDetails = () => {
       if(contract) fetchDonators()
   }, [contract, address])
 
+  useEffect(() => {
+    fetch("https://gaven-blockchain-crowd-funding-api.vercel.app/complains")
+         .then(res => res.json())
+         .then(data => setAllComplains(data))
+         .catch(err => console.error("Error", err))
+  }, [])
+
+  console.log(allComplains)
+
+
   const handleDonate = async () => {     //making the contract call , make it async because contract calls take sometime
       setIsLoading(true)
 
@@ -40,6 +62,30 @@ const CampaignDetails = () => {
       setIsLoading(false)
 
   }
+
+
+  const handleAddComplain = async () => {
+    try {
+      const response = await fetch("https://gaven-blockchain-crowd-funding-api.vercel.app/complains/givecomplain", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(complain)
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log(data); 
+
+    } catch (error) {
+      console.error("Error while sending complain:", error);
+    }
+  }
+
 
   return (
     <div>
@@ -136,6 +182,33 @@ const CampaignDetails = () => {
                   />
                 </div>
             </div>
+
+            <div className='mt-[20px] flex flex-col p-4 bg-[#1c1c24] rounded-[10px]'>
+                <p className='font-epilogue font-medium text-[20px] leading-[30px] text-center text-[#808191]'>Send a Complain</p>    
+                <div className="mt-[30px]">
+                  <input 
+                     type="text" 
+                     placeholder='Reason to Complain'
+                     step='0.01' 
+                     className='w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue text-white text-[18px] leading-[30px] placeholder:text-[#4b5264] rounded-[10px]'
+                     value = {complain.reason}
+                     onChange={(e) => setComplain({ ...complain, reason: e.target.value })}
+                  />
+
+                  <div className="my-[20px] p-4 bg-[#13131a] rounded-[10px]">
+                      <h4 className='font-epilogue font-semibold text-[14px] leading-[22px] text-white'>Do you Find this Campaign Suspecious ?</h4> 
+                      <p className='mt-[20px] font-epilogue font-normal leading-[22px] text-[#808191]'>If so , then please help us out by Sending a Complain</p>
+                  </div>
+
+                  <CustomButton
+                     btnType='button'
+                     title='Send Complain'
+                     styles="w-full bg-pink-400"
+                     handleClick = {handleAddComplain}
+                  />
+                </div>
+            </div>
+
 
          </div>
           

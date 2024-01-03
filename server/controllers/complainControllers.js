@@ -15,13 +15,13 @@ export const getComplains = async (req, res) => {
 }
 
 export const addComplain = async (req, res) => {
-   const { srno, userid, reason } = req.body
+   const { srno, userid, campaignuserid, reason } = req.body
 
-   if (!srno || !userid || !reason) {
+   if (!srno || !userid || !campaignuserid || !reason) {
     return res.status(400).json({ message: "Missing required fields" });
    }
 
-   const newComplain = new Complain({srno, userid, reason})  
+   const newComplain = new Complain({srno, userid, campaignuserid, reason})  
 
    try{
     await newComplain.save()

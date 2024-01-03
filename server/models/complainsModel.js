@@ -1,8 +1,9 @@
 import mongoose from 'mongoose'
 
 const complainSchema = mongoose.Schema({
-    srno : {type:String},
+    srno : {type:Number},
     userid : {type:String},
+    campaignuserid: {type: String},
     reason: {type:String}
 })
 

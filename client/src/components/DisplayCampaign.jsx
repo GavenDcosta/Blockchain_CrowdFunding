@@ -8,8 +8,8 @@ const DisplayCampaign = ({ title, isLoading, campaigns }) => {
 
   
 
-  const handleNavigate = (campaign, count) => {
-    navigate(`/campaign-details/${campaign.title}`, {state: {...campaign, count}})   //sending state through routing, can retrive this state with useLocation Hook
+  const handleNavigate = (campaign, count, index) => {
+    navigate(`/campaign-details/${campaign.title}`, {state: {...campaign, count, index}})   //sending state through routing, can retrive this state with useLocation Hook
   }
 
   return (
@@ -38,7 +38,7 @@ const DisplayCampaign = ({ title, isLoading, campaigns }) => {
             <FundCard
               key={campaign.id}
               {...campaign}
-              handleClick = {() => handleNavigate(campaign, count)}
+              handleClick = {() => handleNavigate(campaign, count, index)}
               count={count}
               index={index}
             />
