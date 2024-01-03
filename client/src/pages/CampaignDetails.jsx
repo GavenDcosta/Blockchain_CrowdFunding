@@ -53,6 +53,12 @@ const CampaignDetails = () => {
 
   console.log(allComplains)
 
+  const filteredComplains = allComplains.filter((item) => item.srno === state.index)
+
+  console.log(filteredComplains)
+
+  const ownerComplaintsCount = allComplains.filter((item) => item.campaignuserid === state.owner).length
+
 
   const handleDonate = async () => {     //making the contract call , make it async because contract calls take sometime
       setIsLoading(true)
@@ -129,6 +135,8 @@ const CampaignDetails = () => {
              </div>
             </div>
 
+            <p className='mt-[2px] font-epilogue font-normal text-[15px] text-[#808191]'>Has received <span className='text-red-900 text-[25px] px-2' >{ownerComplaintsCount}</span> {ownerComplaintsCount == 1 ? "Complain" : "Complain's"} in the Past</p>
+
 
             <div>
              <h4 className='font-epilogue font-semibold text-[18px] text-white uppercase'>Story</h4>
@@ -160,6 +168,25 @@ const CampaignDetails = () => {
     
              </div>
             </div>
+
+
+            <div>
+             <h4 className='font-epilogue font-semibold text-[18px] text-white uppercase'>Complains: {filteredComplains.length}</h4>
+             <div className="mt-[20px] flex flex-col gap-4">
+ 
+                 {filteredComplains.length > 0 ? filteredComplains.map((item,index) => (
+                      <div key={`${item.userid}-${index}`} className='flex flex-col items-start gap-1 flex-wrap'>
+                         <p className='font-epilogue font-normal sm:text-[16px] text-[12px] text-[#b2b3bd] leading-[26px]'>{index + 1}.{item.userid}</p>
+                         <p className='font-epilogue font-normal text-16px text-[#808191] leading-[26px] break-all'>Reason:  {item.reason}</p>
+                      </div>
+                 )) : (
+                  <p className='font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify'>No complains yet, Feel free to send one</p>
+                 )}  
+    
+             </div>
+            </div>
+
+
           </div>
 
          <div className='flex-1'>
