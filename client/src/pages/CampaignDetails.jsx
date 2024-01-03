@@ -212,11 +212,15 @@ const CampaignDetails = () => {
                          <p className='font-epilogue font-normal sm:text-[16px] text-[12px] text-[#b2b3bd] leading-[26px]'>{index + 1}.{item.userid}</p>
                          <div className='flex flex-row flex-wrap items-center justify-between gap-4'>
                            <p className='font-epilogue font-normal text-16px text-[#808191] leading-[26px] break-all'>Reason:  {item.reason}</p>
-                           <img
-                             src={deleteIcon}
-                             className='w-[20px] h-[20px]'
-                             onClick={() => handleDelete(item._id)}
-                           />
+                           {item.userid === address &&
+                              (
+                                <img
+                                  src={deleteIcon}
+                                  className='w-[20px] h-[20px]'
+                                  onClick={() => handleDelete(item._id)}
+                                />
+                              )
+                           }
                          </div>
                       </div>
                  )) : (
