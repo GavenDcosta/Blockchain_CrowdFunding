@@ -25,7 +25,7 @@ POST https://gaven-blockchain-crowd-funding-api.vercel.app/complains/givecomplai
 Content-Type: application/json
 
 {
-    "srno": "1",
+    "srno": 1,
     "userid": "3332437349dfbaefkvn",
     "campaignuserid": "defhf4493u",
     "reason": "this campaign is a scam"
@@ -34,4 +34,4 @@ Content-Type: application/json
 
 ###
 
-DELETE https://gaven-blockchain-crowd-funding-api.vercel.app/complains/deletecomplain/6594f52e55d866a904ca0533
+DELETE https://gaven-blockchain-crowd-funding-api.vercel.app/complains/deletecomplain/6594ff6b3cefb3937e2a2add
