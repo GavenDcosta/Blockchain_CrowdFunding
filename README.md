@@ -6,4 +6,4 @@ You must have Metamask chrome extension in your pc in order to create a campaign
 
 Im using the Mumbai faucet in this.
 
-[Check Deployment here](https://gaven-blockchain-crowd-funding.vercel.app/)
+[Check Deployment here](https://teminiproj-blockchain-crowd-funding.vercel.app/)
