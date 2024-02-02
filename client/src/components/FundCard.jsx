@@ -20,7 +20,7 @@ const FundCard = ({
 
   return (
     <div
-      className="sm:w-[288px] w-full rounded-[15px] bg-[#5369faf8] cursor-pointer shadow-xl border-2 border-sky-500"
+      className="sm:w-[288px] w-full rounded-[15px] bg-white cursor-pointer shadow-xl "
       onClick={handleClick}
     >
       <img

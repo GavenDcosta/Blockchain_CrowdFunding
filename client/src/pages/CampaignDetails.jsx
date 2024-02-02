@@ -191,7 +191,7 @@ const CampaignDetails = () => {
       <div className="mt-[60px] flex lg:flex-row flex-col gap-5">
         <div className="flex-2 flex flex-col gap-[40px]">
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
+            <h4 className="font-epilogue font-semibold text-[18px] text-black uppercase">
               Creator
             </h4>
             <div className="mt-[20px] flex flex-row items-center flex-wrap gap-[14px]">
@@ -203,7 +203,7 @@ const CampaignDetails = () => {
                 />
               </div>
               <div>
-                <h4 className="font-epilogue font-semibold text-[14px] text-white break-all">
+                <h4 className="font-epilogue font-semibold text-[14px] text-black break-all">
                   {state.owner}
                 </h4>
                 <p className="mt-4px font-epilogue font-normal text-[12px] text-[#131313]">
@@ -223,7 +223,7 @@ const CampaignDetails = () => {
           </div>
 
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
+            <h4 className="font-epilogue font-semibold text-[18px] text-black uppercase">
               Story
             </h4>
             <div className="mt-[20px]">
@@ -234,7 +234,7 @@ const CampaignDetails = () => {
           </div>
 
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
+            <h4 className="font-epilogue font-semibold text-[18px] text-black uppercase">
               Category
             </h4>
             <div className="flex flex-row items-center md-[18px] mt-[20px]">
@@ -250,7 +250,7 @@ const CampaignDetails = () => {
           </div>
 
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
+            <h4 className="font-epilogue font-semibold text-[18px] text-black uppercase">
               Donators
             </h4>
             <div className="mt-[20px] flex flex-col gap-4">
@@ -277,7 +277,7 @@ const CampaignDetails = () => {
           </div>
 
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
+            <h4 className="font-epilogue font-semibold text-[18px] text-black uppercase">
               Complains: {filteredComplains.length}
             </h4>
             <div className="mt-[20px] flex flex-col gap-4">
@@ -314,7 +314,7 @@ const CampaignDetails = () => {
         </div>
 
         <div className="flex-1">
-          <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
+          <h4 className="font-epilogue font-semibold text-[18px] text-black uppercase">
             Fund
           </h4>
 
