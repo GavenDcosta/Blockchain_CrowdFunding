@@ -8,7 +8,7 @@ const App = () => {
   const [search, setSearch] = useState("");
 
   return (
-    <div className="relative sm:-8 p-4 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% ... min-h-screen flex flex-row ">
+    <div className="relative sm:-8 p-4 bg-[#cbd5e1] min-h-screen flex flex-row ">
       <div className="sm:flex hidden mr-10 relative">
         <Sidebar />
       </div>
