@@ -15,9 +15,9 @@ export const getComplains = async (req, res) => {
 }
 
 export const addComplain = async (req, res) => {
-   const { srno, userid, campaignuserid, reason } = req.body
+   const { srno, userid, campaignuserid, category, reason } = req.body
 
-   const newComplain = new Complain({srno, userid, campaignuserid, reason})  
+   const newComplain = new Complain({srno, userid, campaignuserid, category, reason})  
 
    try{
     await newComplain.save()

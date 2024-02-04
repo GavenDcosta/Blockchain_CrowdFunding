@@ -23,6 +23,7 @@ const CampaignDetails = () => {
     srno: state.index,
     userid: address,
     campaignuserid: state.owner,
+    category: state.category,
     reason: "",
   });
 
@@ -85,6 +86,7 @@ const CampaignDetails = () => {
             srno: state.index,
             userid: address,
             campaignuserid: state.owner,
+            category: state.category,
             reason: complain.reason,
           }),
         }
