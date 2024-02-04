@@ -19,10 +19,9 @@ export const navlinks = [
     link: "/create-campaign",
   },
   {
-    name: "payment",
+    name: "charts",
     imgUrl: payment,
-    link: "/",
-    disabled: true,
+    link: "/charts",
   },
   // {
   //   name: 'withdraw',
