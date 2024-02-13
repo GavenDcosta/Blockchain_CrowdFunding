@@ -20,20 +20,20 @@ const Charts = () => {
   const generateComplaintStats = () => {
     const categoryCounts = {};
     complaints.forEach((complaint) => {
-      const categories = complaint.category.split(', ');
+      const categories = complaint.category ? complaint.category.split(', ') : [];
       categories.forEach((category) => {
         categoryCounts[category] = (categoryCounts[category] || 0) + 1;
       });
     });
-
+  
     const categoryDivs = Object.keys(categoryCounts).map((category) => (
-        <div key={category} className="bg-white  m-2 p-4 shadow-xl rounded-full">
-          <span className="text-black font-bold">
-            {`${category}: ${categoryCounts[category]} complaints`}
-          </span>
-        </div>
+      <div key={category} className="bg-white m-2 p-4 shadow-xl rounded-full">
+        <span className="text-black font-bold">
+          {`${category}: ${categoryCounts[category]} complaints`}
+        </span>
+      </div>
     ));
-
+  
     return categoryDivs;
   };
 
