@@ -8,7 +8,7 @@ import { StateContextProvider } from './context'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-    <ThirdwebProvider activeChain={80002}>
+    <ThirdwebProvider activeChain={ChainId.Mumbai}>
         <Router>
          <StateContextProvider>            {/*wrap app in this to be able to use our contracts and all of its functions */}
             <App/>
