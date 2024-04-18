@@ -9,7 +9,8 @@ module.exports = {
     network : {
       hardhat : {},
       mumbai: {
-        url: 'https://rpc-mumbai.maticvigil.com',
+        // url: 'https://80002.rpc.thirdweb.com',
+        url: 'https://80002.rpc.thirdweb.com',
         accounts: [`0x${process.env.PRIVATE_KEY}`]             //private key of metamask account in extension
       }
     },                          //till here
