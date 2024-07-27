@@ -11,6 +11,8 @@ Im using the Mumbai faucet in this.
 
 # Contributors
 
-Gaven Dcosta 
-Merwin Rebello 
-Noel Sangle 
+1 - Gaven Dcosta.
+ 
+2 - Merwin Rebello.
+
+3 - Noel Sangle.
